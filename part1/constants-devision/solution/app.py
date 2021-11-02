@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_restx import Api
 
-from models import SmartPhone
+from models import SmartPhone, File
 from setup_db import db
 from views.smartphones import sm_ns
 from views.files import file_ns
@@ -26,10 +26,12 @@ def register_extensions(app):
 def create_data(app, db):
     with app.app_context():
         db.create_all()
-
         sp1 = SmartPhone(id=1, name="iphone", price=100000)
         sp2 = SmartPhone(id=2, name="android", price=110000)
+        f1 = File(id=1, name='config.cfg', path='/var/', size=500)
+        f2 = File(id=2, name='run.exe', path='/var/lib/', size=500)
         with db.session.begin():
+            db.session.add_all([f1, f2])
             db.session.add_all([sp1, sp2])
 
 app = create_app()

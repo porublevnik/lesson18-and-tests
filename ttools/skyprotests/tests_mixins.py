@@ -155,13 +155,15 @@ class ResponseTestsMixin:
         compex check that testing:
         - response status code
         - is_json type
-        - expected_obj (if arg expected is not None)
+        - optional expected_obj (if arg expected is not None)
+        - optional answer_obj - check what's returned
         """
         code: list = kwargs.get('code')
         url: str = kwargs.get('url')
         response = kwargs.get('response') or kwargs.get("student_response")
         expected: object = kwargs.get('expected')
         method: str = kwargs.get('method')
+        answer = kwargs.get('answer')
         self._required_args_checker(
             "url",
             ["response", "student_response"],
@@ -204,6 +206,14 @@ class ResponseTestsMixin:
                 f"%@Проверьте что в ответ на {method}-запрос по адресу {url}"
                 f" возвращается пустое значение."
             )
+        if answer:
+            breakpoint()
+            answer_json = response.json or json.loads(response.data)  # 
+            self.assertTrue(
+                answer==answer_json,
+                f"%@Проверьте, что в ответе на {method}-запрос по адресу {url}"
+                f" возвращается корректный ответ")
+
 
     def compare_result_fields_with_author_solution(
             self,

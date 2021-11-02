@@ -2,7 +2,7 @@ from setup_db import db
 
 
 class Book(db.Model):
-    __tablename__ = 'book'
+    __tablename__ = 'books'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     author = db.Column(db.String)
@@ -11,8 +11,9 @@ class Book(db.Model):
 
 
 class Review(db.Model):
-    __tablename__ = 'review'
+    __tablename__ = 'reviews'
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String)
     rating = db.Column(db.Integer)
     book_id = db.Column(db.Integer)
+

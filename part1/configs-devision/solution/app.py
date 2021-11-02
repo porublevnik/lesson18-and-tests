@@ -1,5 +1,5 @@
 import requests
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
@@ -41,7 +41,7 @@ def phones():
         sm_d = s.__dict__
         del sm_d['_sa_instance_state']
         res.append(sm_d)
-    return res, 200
+    return jsonify(res), 200
 
 
 if __name__ == '__main__':

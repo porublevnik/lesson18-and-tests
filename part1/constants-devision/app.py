@@ -57,10 +57,12 @@ class File(db.Model):
 
 
 db.create_all()
-
+f1 = File(id=1, name='config.cfg', path='/var/', size=500)
+f2 = File(id=2, name='run.exe', path='/var/lib/', size=500)
 sp1 = SmartPhone(id=1, name="iphone", price=100000)
 sp2 = SmartPhone(id=2, name="android", price=110000)
 with db.session.begin():
+    db.session.add_all([f1, f2])
     db.session.add_all([sp1, sp2])
 
 sm_ns = api.namespace('smartphones')

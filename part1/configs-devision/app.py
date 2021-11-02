@@ -13,17 +13,17 @@
 #   {
 #     "name": "iphone 11",
 #     "brand": "apple",
-#     "price": "40000"
+#     "price": 40000
 #   },
 #   {
 #     "name": "iphone 10",
 #     "brand": "apple",
-#     "price": "300000"
+#     "price": 300000
 #   },
 #   {
 #     "name": "redmi 9A",
 #     "brand": "redmi",
-#     "price": "30000"
+#     "price": 30000
 #   }
 # ]
 #
@@ -55,7 +55,7 @@
 
 
 import requests
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -79,7 +79,7 @@ db.create_all()
 
 @app.route("/import")
 def import_data():
-    data = requests.get(url="") # TODO Здесь добавьте ссылку на внешнее хранилище
+    data = requests.get(url='https://jsonkeeper.com/b/QBYO') # TODO Здесь добавьте ссылку на внешнее хранилище
     for d in data.json():
         p = Phone(**d)
         with db.session.begin():
@@ -95,7 +95,7 @@ def phones():
         sm_d = s.__dict__ 
         del sm_d['_sa_instance_state']
         res.append(sm_d)
-    return res, 200
+    return jsonify(res), 200
 
 
 if __name__ == '__main__':

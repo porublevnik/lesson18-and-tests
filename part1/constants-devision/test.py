@@ -17,7 +17,7 @@ from ttools.skyprotests.tests_mixins import ResponseTestsMixin  # noqa: E402
 
 class ArchitectureTestCase(SkyproTestCase):
     def setUp(self):
-        self.checkpath = basepath.joinpath('part1', 'views-devision-3')
+        self.checkpath = basepath.joinpath('part1', 'constants-devision')
 
     def test_folder_with_views_is_created(self):
         folder = 'views'
@@ -37,11 +37,11 @@ class ArchitectureTestCase(SkyproTestCase):
             self.assertTrue(os.path.exists(self.checkpath.joinpath(file)),
             f"%@ Проверьте что создали файл {file} в корне папки приложения")
 
-    def test_views_files_has_namespace_vars(self):
+    def test_views_has_namespace_vars(self):
         from views import files
         from views import smartphones
-        namespaces_vars = ['book_ns', 'author_ns']
-        for var, module in zip (namespaces_vars, [file_ns, sm_ns]):   
+        namespaces_vars = ['file_ns', 'sm_ns']
+        for var, module in zip (namespaces_vars, [files, smartphones]):   
             self.assertTrue(
                 hasattr(module, var), 
                 f'%@ Проверте что модуль {module} содержит переменную {var}'
@@ -110,7 +110,7 @@ class ApplicationTestCase(SkyproTestCase,
         }
         self.check_status_code_jsonify_and_expected(**test_options)
 
-    def test_view_books_get_is_available_and_works_correct(self):
+    def test_view_smartphones_get_is_available_and_works_correct(self):
         url = '/smartphones/'
         test_options = {
             "url": url,
@@ -121,17 +121,7 @@ class ApplicationTestCase(SkyproTestCase,
         }
         self.check_status_code_jsonify_and_expected(**test_options)
 
-    def test_view_books_post_is_available_and_works_correct(self):
-        url = '/smartphones/'
-        test_options = {
-            "url": url,
-            "method": 'POST',
-            "code": [201],
-            "student_response": self.student_app.post(url, json="")
-        }
-        self.check_status_code_jsonify_and_expected(**test_options)
-
-    def test_view_books_id_get_is_available_and_works_correct(self):
+    def test_view_smartphones_id_get_is_available_and_works_correct(self):
         url = '/smartphones/1'
         test_options = {
             "url": url,

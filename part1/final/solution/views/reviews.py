@@ -14,7 +14,6 @@ class ReviewsView(Resource):
         res = []
         for b in rs:
             sm_d = b.__dict__
-            # грязный хак чтобы не перебирать поля так как здесь нет сериализации при помощи marshmallow
             del sm_d['_sa_instance_state']
             res.append(sm_d)
         return res, 200
@@ -25,7 +24,7 @@ class ReviewsView(Resource):
         
         db.session.add(ent)
         db.session.commit()
-        return "", 201, {"location": f"/reviews/{ent.id}"}
+        return "", 201
 
 
 @review_ns.route('/<int:rid>')
@@ -33,7 +32,6 @@ class ReviewView(Resource):
     def get(self, rid):
         r = Review.query.get(rid)
         sm_d = r.__dict__
-        # грязный хак чтобы не перебирать поля так как здесь нет сериализации при помощи marshmallow
         del sm_d['_sa_instance_state']
         return sm_d, 200
 
@@ -54,3 +52,4 @@ class ReviewView(Resource):
         db.session.delete(review)
         db.session.commit()
         return "", 204
+
