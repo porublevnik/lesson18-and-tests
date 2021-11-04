@@ -43,15 +43,15 @@ class BooksView(Resource):
 @book_ns.route('/<int:bid>')
 class BookView(Resource):
     def get(self, bid):
-        return {}, 200
+        return bid, 200
 
 
 # Вы можете протестировать свое приложение самостоятельно.
 # Проверьте получаете ли вы соответсвующие коды
 # в ответах на запрос по адресу
-#  GET http://localhost:10001/books/  code 200
-#  POST http://localhost:10001/books/ code 201
-#  GET http://localhost:10001/books/1 code 200
+#  GET http://localhost:10001/books/  - returns [] code 200
+#  POST http://localhost:10001/books/ - returns "" code 201
+#  GET http://localhost:10001/books/1 - returns bid (Int), code 200
 
 if __name__ == '__main__':
     app.run(host="localhost", port=10001, debug=True)

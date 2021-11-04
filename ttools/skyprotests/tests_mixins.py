@@ -207,7 +207,6 @@ class ResponseTestsMixin:
                 f" возвращается пустое значение."
             )
         if answer:
-            breakpoint()
             answer_json = response.json or json.loads(response.data)  # 
             self.assertTrue(
                 answer==answer_json,

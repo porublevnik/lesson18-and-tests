@@ -83,7 +83,8 @@ class ApplicationTestCase(SkyproTestCase,
             "code": [200],
             "student_response": self.student_app.get(
                 url, json=""),
-            "expected": dict
+            "expected": int,
+            "answer": 1,
         }
         self.check_status_code_jsonify_and_expected(**test_options)
 

@@ -6,7 +6,7 @@ book_ns = Namespace('books')
 @book_ns.route('/')
 class BooksView(Resource):
     def get(self):
-        return "", 200
+        return [], 200
 
     def post(self):
         return "", 201
