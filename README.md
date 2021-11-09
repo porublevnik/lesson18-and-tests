@@ -40,11 +40,11 @@ Pycharm может предложить вам сделать это после 
 ### Порядок выполнения заданий
 #### Часть 1:
 
-- part1/views-devision-1
-- part1/views-devision-2
-- part1/views-devision-3
-- part1/constants-devision
-- part1/configs-devision
+- part1/views-division-1
+- part1/views-division-2
+- part1/views-division-3
+- part1/constants-division
+- part1/configs-division
 - part1/final
 
 Задачи описаны в комментариях в файле main.py
